@@ -22,7 +22,7 @@
 
                         <p:inputText placeholder="Login" required="true" value="#{managerUsuario.usuario.email}"/>
                         <p:spacer />
-                        <p:inputText placeholder="Senha" required="true" type="password" validatorMessage="É necessário colocar a senha!" />
+                        <p:inputText placeholder="Senha" value="#{managerUsuario.usuario.senha}" required="true" type="password" validatorMessage="É necessário colocar a senha!" />
                         <p:spacer />
 
                         <p:commandButton value="Criar" actionListener="#{managerUsuario.salvar()}" update="@form"/>
@@ -92,7 +92,7 @@
                 
                 -webkit-text-stroke-width: 1px;
                 -webkit-text-stroke-color: #000000c4;
-                font-family: fantasy;
+                font-family: arial;
                 color: white;
             }
 

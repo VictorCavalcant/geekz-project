@@ -52,7 +52,7 @@ public class ManagerUsuario implements Serializable{
              FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário registrado com sucesso!"));
         } else {
             System.out.println("falhou");
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(usuarioServico.validarCadastro(usuario)));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, usuarioServico.validarCadastro(usuario), usuarioServico.validarCadastro(usuario)));
         }
         
     }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
 import generico.EntidadeGenerica;
@@ -41,7 +37,7 @@ public class Usuario extends EntidadeGenerica {
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -83,7 +79,5 @@ public class Usuario extends EntidadeGenerica {
         }
         return Objects.equals(this.id, other.id);
     }
-
-   
 
 }

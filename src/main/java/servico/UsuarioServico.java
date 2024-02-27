@@ -27,10 +27,10 @@ public class UsuarioServico extends ServicoGenerico<Usuario> {
         Matcher matcher = pattern.matcher(usuario.getEmail());
 
         if (!matcher.matches()) {
-            return "email inválido!";
+            return "Email inválido!";
         } else {
 
-            String sql = "SELECT u from  Usuario u where u.email :email)";
+            String sql = "SELECT u from Usuario u where u.email like :email";
 
             Query query = getEntityManager().createQuery(sql);
 
