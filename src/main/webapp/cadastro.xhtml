@@ -25,7 +25,7 @@
                         <p:inputText placeholder="Senha" value="#{managerUsuario.usuario.senha}" required="true" type="password" validatorMessage="É necessário colocar a senha!" />
                         <p:spacer />
 
-                        <p:commandButton value="Criar" actionListener="#{managerUsuario.salvar()}" update="@form"/>
+                        <p:commandButton value="Criar" actionListener="#{managerUsuario.cadastrar()}" update="@form"/>
                         <p:spacer />
                     </h:panelGrid>
                 </p:card>

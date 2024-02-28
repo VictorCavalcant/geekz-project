@@ -80,4 +80,11 @@ public class Usuario extends EntidadeGenerica {
         return Objects.equals(this.id, other.id);
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", email=" + email + ", senha=" + senha + '}';
+    }
+    
+    
+
 }

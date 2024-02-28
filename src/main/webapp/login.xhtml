@@ -19,12 +19,12 @@
 
                     <h:panelGrid columns="1">
 
-                        <p:inputText placeholder="Login" />
+                        <p:inputText placeholder="Login" value="#{managerUsuario.usuario.email}" />
                         <p:spacer />
-                        <p:inputText placeholder="Senha" type="password" />
+                        <p:inputText placeholder="Senha" value="#{managerUsuario.usuario.senha}" type="password" />
                         <p:spacer />
 
-                        <p:commandButton value="Entrar" />
+                        <p:commandButton value="Entrar" actionListener="#{managerUsuario.logar()}"/>
                         <p:spacer />
                         <p:link href="cadastro.xhtml">
                             Não tem um cadastro? Clique aqui

@@ -18,31 +18,28 @@ public class UsuarioServico extends ServicoGenerico<Usuario> {
         super(Usuario.class);
     }
 
-    public String validarCadastro(Usuario usuario) {
+    
+    public Usuario validarLogin(Usuario usuario) {
+        
+            String sql = "SELECT u from Usuario u where u.email like lower(:email) and u.senha like lower(:senha)";
 
-        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            Query query = getEntityManager().createQuery(sql);
+            query.setParameter("email", "%" + usuario.getEmail() + "%");
+            query.setParameter("senha", "%" + usuario.getSenha()+ "%");
 
-        Pattern pattern = Pattern.compile(regex);
+            return (Usuario) query.getResultList().get(0);
+        }
+    
+    public Usuario validarCadastro(Usuario usuario) {
 
-        Matcher matcher = pattern.matcher(usuario.getEmail());
-
-        if (!matcher.matches()) {
-            return "Email inválido!";
-        } else {
-
-            String sql = "SELECT u from Usuario u where u.email like :email";
+            String sql = "SELECT u from Usuario u where u.email like lower(:email)";
 
             Query query = getEntityManager().createQuery(sql);
 
             query.setParameter("email", "%" + usuario.getEmail() + "%");
 
-            if (query.getResultList().isEmpty()) {
-                return "valido";
-            } else {
-                return "Usuário já existe!";
-            }
+            return (Usuario) query.getResultList().get(0);
         }
 
     }
 
-}
