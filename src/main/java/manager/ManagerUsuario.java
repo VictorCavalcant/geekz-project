@@ -10,21 +10,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 import servico.UsuarioServico;
+import utilitario.Message;
 
 /**
  *
  * @author victo
  */
+
 @Named
-@ViewScoped
+@ManagedBean(value = "managerUsuario")
+@SessionScoped
 public class ManagerUsuario implements Serializable {
 
     @EJB
@@ -48,7 +54,7 @@ public class ManagerUsuario implements Serializable {
         }
     }
 
-    public void logar() {
+    public String logar() {
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
         Pattern pattern = Pattern.compile(regex);
@@ -56,25 +62,33 @@ public class ManagerUsuario implements Serializable {
         Matcher matcher = pattern.matcher(usuario.getEmail());
 
         if (!matcher.matches()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email invalido", "Email invalido"));
+            Message.errorMsg("Email inválido");
         } else {
 
             usuario = usuarioServico.validarLogin(usuario);
-            if (usuario.getId() != null) {
-                System.out.println(usuario);
-                FacesContext context = FacesContext.getCurrentInstance();
-                String url = context.getExternalContext().getRequestContextPath();
-                try {
-                    System.out.println("id usuario ------> " + usuario.getId());
-                    context.getExternalContext().redirect(url + "/" + "main.xhtml?visualizar=" + usuario.getId());
-                } catch (IOException ex) {
-                    System.out.println(ex);
-                }
+            if (usuario != null) {
+                System.out.println("entrei!");
+                HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+                session.setAttribute("usuario", usuario);
+                
+                return "main.xhtml?faces-redirect=true";
+                
+                
+//                FacesContext context = FacesContext.getCurrentInstance();;
+//                String url = context.getExternalContext().getRequestContextPath();
+//                try {
+//                    System.out.println("id usuario ------> " + usuario.getId());
+//                    context.getExternalContext().redirect(url + "/" + "main.xhtml");
+//                } catch (IOException ex) {
+//                    System.out.println(ex);
+//                }
             } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario não encontrado", "Usuario não encontrado"));
+                Message.errorMsg("Usuário não encontrado");
+                return "login?faces-redirect=true";
             }
         }
         instanciar();
+        return null;
     }
 
     public void cadastrar() {
@@ -85,18 +99,18 @@ public class ManagerUsuario implements Serializable {
 
         Matcher matcher = pattern.matcher(usuario.getEmail());
 
-        if (!usuario.getEmail().isBlank() && !usuario.getSenha().isBlank()) {
+        if (!usuario.getEmail().isEmpty() && !usuario.getSenha().isEmpty()) {
 
             if (!matcher.matches()) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email invalido", "Email invalido"));
+                Message.errorMsg("Email inválido");
             } else {
                 Usuario checkUser = usuarioServico.validarCadastro(usuario);
                 if (checkUser == null) {
                     usuarioServico.salvar(usuario);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuário registrado com sucesso!"));
+                    Message.msg("Usuário cadastrado com sucesso!");
                 } else {
                     System.out.println("falhou");
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário já cadastrado", "Usuário já cadastrado"));
+                    Message.errorMsg("Usuário já cadastrado");
                 }
 
             }

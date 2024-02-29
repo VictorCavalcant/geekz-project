@@ -20,6 +20,8 @@ public class Usuario extends EntidadeGenerica {
     @GeneratedValue(generator = "seq_user", strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    
+    public static final long serialVersionUID = 1L;
     private String email;
     private String senha;
 

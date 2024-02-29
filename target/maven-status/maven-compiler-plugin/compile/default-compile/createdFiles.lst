@@ -1,8 +1,9 @@
-generico/EntidadeGenerica.class
-manager/ManagerUsuario.class
-enums/TipoTelefone.class
-generico/ServicoGenerico.class
-com/mycompany/geekz/resources/JakartaEE8Resource.class
-com/mycompany/geekz/JakartaRestConfiguration.class
-servico/UsuarioServico.class
-modelo/Usuario.class
+generico\ServicoGenerico.class
+enums\TipoTelefone.class
+com\mycompany\geekz\JakartaRestConfiguration.class
+servico\UsuarioServico.class
+manager\ManagerUsuario.class
+generico\EntidadeGenerica.class
+com\mycompany\geekz\resources\JakartaEE8Resource.class
+modelo\Usuario.class
+utilitario\Message.class
