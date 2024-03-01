@@ -6,28 +6,147 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Main</title>
-      
+
     </h:head>
     <h:body>
-        <h:form>
-            <p:outputPanel styleClass="m-header" >
-                Usuario: #{managerUsuario.usuario.email}
-            </p:outputPanel>
-            
-        </h:form>
+        <div class="main">
+            <h:form>
+                <p:outputPanel styleClass="m-header" >
+                    <img class="header-logo" src="imgs/logo.png"/>
+                    <div class="user-card">
+                        <h1 class="login-text"> Usuario: #{managerUsuario.usuario.email}</h1>
+                    </div>
+                </p:outputPanel>
+                <div class="showCard">
+                    <img class="showProduct" src="imgs/darkSideHoddie.png" />
+                    <img class="showCharacter" src="imgs/DarthVader.png"/>
+                    <img class="catchPhrase" src="imgs/catchPhrase.png" />
+                    <video class="showBackground" autoplay="true" loop="true" muted="true"  disablePictureInPicture="true" plays-inline="true" player="mp4">
+                        <source src="videos/space-loop.mp4" type="video/mp4"/>
+                    </video>
+                </div>
+                <div class="showProductGrid">
+                    <div class="cardProduct">
+
+                    </div>
+                     <div class="cardProduct">
+
+                    </div>
+                     <div class="cardProduct">
+
+                    </div>
+                </div>
+            </h:form>
+        </div>
+
 
 
     </h:body>
-    
+
     <style>
+
+        * {
+            margin: 0;
+        }
+
+        .user-card {
+            margin-right: 10px;
+        }
+
+        .login-text {
+            color: white;
+        }
+
+        .header-logo {
+            width: 300px;
+        }
         .m-header{
             display: flex;
-            background-color: red;
             width: 100vw;
             height: 80px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .showProductGrid {
+            display: flex;
+            grid-row: 1;
+            background-color: blue;
+            overflow: hidden;
+        }
+
+
+        .cardProduct {
+            display: flex;
+            background-color: red;
+            width: 400px;
+            height: 400px;
+            margin: 19px 32px 10px 15px;
+        }
+
+        .showCard {
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+            width: 100vw;
+            height: 500px;
+            box-shadow: 5px 2px 20px 12px black;
+        }
+
+        .catchPhrase {
+            width: 600px;
+            z-index: 1;
+        }
+
+        .showProduct {
+            width: 350px;
+            transition: transform .2s;
+            z-index: 1;
+        }
+
+        .showCharacter {
+            width: 450px;
+            transition: transform .2s;
+            filter: drop-shadow(3px -7px 5px red);
+            z-index: 1;
+        }
+
+        .showCard:hover .showCharacter {
+            transform: scale(1.05);
+        }
+
+        .showCard:hover .showProduct {
+            transform: scale(1.1);
+        }
+
+        .showBackground {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            background: url("imgs/mainBG.jpg");
+            background-clip: border-box;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
         }
     </style>
-      
+
 </html>
 
 
