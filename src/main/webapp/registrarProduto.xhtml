@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registrar Produto</title>
+      
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="main">
+                <p:growl />
+                <img class="logo" src="imgs/logo.png"/>
+                <p:card styleClass="loginCard" >
+                    <f:facet name="title">
+                        Registre um produto
+                    </f:facet>
+
+                    <h:panelGrid columns="1">
+
+                        <p:inputText placeholder="Nome" required="true" value="#{managerProduto.produto.nome}"/>
+                        <p:spacer />
+                        <p:inputText placeholder="Descrição" value="#{managerProduto.produto.descricao}" required="true"/>
+                        <p:spacer />
+                        <p:inputNumber placeholder="Preço" value="#{managerProduto.produto.preco}" required="true"/>
+                        <p:spacer />
+                        <p:commandButton value="Registrar" actionListener="#{managerProduto.registrarProduto()}" update="@form"/>
+                        <p:spacer />
+                    </h:panelGrid>
+                </p:card>
+            </div>
+        </h:form>
+
+
+    </h:body>
+      <style>
+
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+
+            body .ui-card {
+                background: none;
+            }
+            
+            body .ui-card .ui-card-title {
+                margin-top: 10px;
+                
+            }
+
+            #main {
+                background: url('imgs/wallpaper-login.jpg');
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-clip: border-box;
+                background-size: cover;
+                display: flex;
+                width: 100vw;
+                height: 100vh;
+                animation: moveBackground 25s linear infinite;
+            }
+
+
+            @keyframes moveBackground{
+                to {
+                    background-position-x: -100vw;
+                }
+            }
+
+            .loginCard {
+                display: flex;
+                flex-direction: column;
+                background-color: rgba(196,196,196,0.4);
+                width: 25em;
+                height: 20em;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                backdrop-filter: blur(3px);
+                border: 1px solid red;
+            }
+
+            body .ui-card .ui-card-title {
+                
+                -webkit-text-stroke-width: 1px;
+                -webkit-text-stroke-color: #000000c4;
+                font-family: arial;
+                color: white;
+            }
+
+            .logo {
+                width: 700px;
+            }
+
+
+            .input-group {
+                position: relative;
+                margin-bottom: 10px;
+            }
+
+            .input-group .icon {
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                transform: translateY(50%);
+                z-index: 1;
+            }
+
+            .input-group input {
+                padding: 10px;
+                padding-left: 30px; /* Ajuste conforme necessário */
+            }
+
+
+
+
+        </style>
+</html>
+
+

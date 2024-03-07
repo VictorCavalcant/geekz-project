@@ -1,9 +1,12 @@
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\servico\UsuarioServico.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\com\mycompany\geekz\resources\JakartaEE8Resource.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\manager\ManagerUsuario.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\generico\ServicoGenerico.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\enums\TipoTelefone.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\generico\EntidadeGenerica.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\modelo\Usuario.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\com\mycompany\geekz\JakartaRestConfiguration.java
-D:\Documentos\Java\Aulas Java\GeekZ\src\main\java\utilitario\Message.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/enums/TipoTelefone.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/servico/UsuarioServico.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/modelo/Produto.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/modelo/Usuario.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/utilitario/Message.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/com/mycompany/geekz/JakartaRestConfiguration.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/manager/ManagerUsuario.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/manager/ManagerProduto.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/com/mycompany/geekz/resources/JakartaEE8Resource.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/generico/EntidadeGenerica.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/generico/ServicoGenerico.java
+/home/victor/Documentos/Java/geekz-project/src/main/java/servico/ProdutoServico.java

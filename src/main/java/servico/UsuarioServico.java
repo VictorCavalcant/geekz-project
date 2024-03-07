@@ -43,7 +43,13 @@ public class UsuarioServico extends ServicoGenerico<Usuario> {
 
         query.setParameter("email", "%" + usuario.getEmail() + "%");
 
-        return (Usuario) query.getResultList().get(0);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        } else {
+            return (Usuario) query.getResultList().get(0);
+        }
+        
+        
     }
 
 }

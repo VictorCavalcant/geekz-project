@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package manager;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +10,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import modelo.Usuario;
@@ -27,7 +20,6 @@ import utilitario.Message;
  *
  * @author victo
  */
-
 @Named
 @ManagedBean(value = "managerUsuario")
 @SessionScoped
@@ -70,10 +62,9 @@ public class ManagerUsuario implements Serializable {
                 System.out.println("entrei!");
                 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
                 session.setAttribute("usuario", usuario);
-                
+
                 return "main.xhtml?faces-redirect=true";
-                
-                
+
 //                FacesContext context = FacesContext.getCurrentInstance();;
 //                String url = context.getExternalContext().getRequestContextPath();
 //                try {
