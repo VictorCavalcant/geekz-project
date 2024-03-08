@@ -27,20 +27,30 @@ public class ManagerProduto implements Serializable {
 
     private Produto produto;
     private List<Produto> produtos;
+    private List<Produto> produtosCarrinho;
 
     @PostConstruct
     public void instanciar() {
         produto = new Produto();
         produto.ativo = true;
         produtos = produtoServico.findAll();
+        produtosCarrinho = new ArrayList<>();
     }
 
-    public void adicionarAoCarrinho() {
-        produtos.add(produto);
+    public void adicionarAoCarrinho(Produto produto) {
+        
+        if (!produtosCarrinho.contains(produto)) {
+              produtosCarrinho.add(produto);
+              Message.msg("Produto adicionado com sucesso!");
+        } else {
+            Message.errorMsg("Esse produto já foi adicionado ao carrinho!");
+        }
+        
+      
     }
 
-    public void removerDoCarrinho() {
-
+    public void removerDoCarrinho(Produto produto) {
+        produtosCarrinho.remove(produto);
     }
 
     public void registrarProduto() {
@@ -73,5 +83,15 @@ public class ManagerProduto implements Serializable {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
+
+    public List<Produto> getProdutosCarrinho() {
+        return produtosCarrinho;
+    }
+
+    public void setProdutosCarrinho(List<Produto> produtosCarrinho) {
+        this.produtosCarrinho = produtosCarrinho;
+    }
+    
+    
 
 }
