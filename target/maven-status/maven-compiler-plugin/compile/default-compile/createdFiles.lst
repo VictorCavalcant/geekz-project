@@ -1,4 +1,5 @@
 generico/EntidadeGenerica.class
+manager/ManagerCarrinho.class
 generico/ServicoGenerico.class
 com/mycompany/geekz/resources/JakartaEE8Resource.class
 modelo/Produto.class

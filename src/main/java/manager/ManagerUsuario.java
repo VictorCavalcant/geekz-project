@@ -78,7 +78,6 @@ public class ManagerUsuario implements Serializable {
                 return "login?faces-redirect=true";
             }
         }
-        instanciar();
         return null;
     }
 
@@ -109,7 +108,7 @@ public class ManagerUsuario implements Serializable {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Todos os campos devem ser preenchidos!", "Todos os campos devem ser preenchidos!"));
         }
-        instanciar();
+
     }
 
     public Usuario getUsuario() {

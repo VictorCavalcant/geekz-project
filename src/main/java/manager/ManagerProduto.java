@@ -3,13 +3,15 @@ package manager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Produto;
+import org.primefaces.PrimeFaces;
 import servico.ProdutoServico;
 import utilitario.Message;
 
@@ -19,7 +21,7 @@ import utilitario.Message;
  */
 @Named
 @ManagedBean(value = "managerProduto")
-@SessionScoped
+@ViewScoped
 public class ManagerProduto implements Serializable {
 
     @EJB
@@ -31,26 +33,23 @@ public class ManagerProduto implements Serializable {
 
     @PostConstruct
     public void instanciar() {
-        produto = new Produto();
-        produto.ativo = true;
-        produtos = produtoServico.findAll();
-        produtosCarrinho = new ArrayList<>();
-    }
+        System.out.println("Passando: ");
+        PrimeFaces.current().ajax().update("@form");
+        Map<String, String> parms = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String visualizar = parms.get("visualizar");
+        String editar = parms.get("editar");
 
-    public void adicionarAoCarrinho(Produto produto) {
-        
-        if (!produtosCarrinho.contains(produto)) {
-              produtosCarrinho.add(produto);
-              Message.msg("Produto adicionado com sucesso!");
+        if (visualizar != null) {
+            produto = produtoServico.find(Long.valueOf(visualizar));
+            System.out.println("Produto param ----> " + produto);
+        } else if (editar != null) {
+            produto = produtoServico.find(Long.valueOf(editar));
         } else {
-            Message.errorMsg("Esse produto já foi adicionado ao carrinho!");
+            produto = new Produto();
+            produto.ativo = true;
+            produtos = produtoServico.findAll();
+            produtosCarrinho = new ArrayList<>();
         }
-        
-      
-    }
-
-    public void removerDoCarrinho(Produto produto) {
-        produtosCarrinho.remove(produto);
     }
 
     public void registrarProduto() {
@@ -64,8 +63,21 @@ public class ManagerProduto implements Serializable {
                 Message.errorMsg("Produto já cadastrado");
             }
         }
+    }
 
-        instanciar();
+    public void atualizarProduto(Produto produto) {
+        
+        System.out.println("Produto que ta vindo ----> " + produto);
+        
+        Produto updProduto = produtoServico.find(produto.getId());
+
+        if (updProduto.getId() != null) {
+            produtoServico.atualizar(produto);
+            Message.msg("Produto atualizado com sucesso");
+        } else {
+            Message.errorMsg("Erro ao atualizar o produto");
+        }
+
     }
 
     public Produto getProduto() {
@@ -83,15 +95,5 @@ public class ManagerProduto implements Serializable {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-
-    public List<Produto> getProdutosCarrinho() {
-        return produtosCarrinho;
-    }
-
-    public void setProdutosCarrinho(List<Produto> produtosCarrinho) {
-        this.produtosCarrinho = produtosCarrinho;
-    }
-    
-    
 
 }

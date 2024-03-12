@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Product Page</title>
+
+    </h:head>
+    <h:body>
+        <div class="main">
+            <h:form >
+                <p:growl />
+                <p:outputPanel styleClass="m-header" >
+                    <img class="header-logo" src="imgs/logo.png"/>
+                    <div class="user-card">
+                        <p:badge value="#{managerCarrinho.produtosCarrinho.size()}" severity="danger">
+                            <p:button icon="pi pi-cart-plus" disabled="true"/>
+                        </p:badge>
+                        <p:spacer width="20"/>
+                        <h1 class="login-text"> Usuario: #{managerUsuario.usuario.email}</h1>
+                    </div>
+                </p:outputPanel>
+                <p:card styleClass="cardProduct">
+                    <h:outputText value="#{managerProduto.produto.nome}"/>
+                    <p:spacer height="15"/>
+                    <h:outputText value="#{managerProduto.produto.descricao}"/>
+                    <p:spacer height="15"/>
+                    <h:outputText value="R$#{managerProduto.produto.preco}"/>
+                    <p:spacer height="15"/>
+                    <p:commandButton value="Comprar" actionListener="#{managerCarrinho.adicionarAoCarrinho(managerProduto.produto)}" update="@form"/>
+                </p:card>
+
+            </h:form>
+        </div>
+
+
+
+    </h:body>
+
+    <style>
+
+        * {
+            margin: 0;
+        }
+
+        .diagContent {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+
+
+        body .ui-dialog .ui-dialog-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        body .ui-panelgrid .ui-panelgrid-cell {
+            background: none;
+            display: flex;
+        }
+
+        body .ui-card .ui-card-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .user-card {
+            display: flex;
+            flex-direction: row;
+            margin-right: 10px;
+        }
+
+        .login-text {
+            color: white;
+        }
+
+
+
+        .header-logo {
+            width: 300px;
+        }
+        .m-header{
+            display: flex;
+            width: 100vw;
+            height: 80px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .showProductGrid {
+            display: flex;
+            grid-row: 1;
+            background-color: blue;
+            overflow: hidden;
+        }
+
+
+        .cardProduct {
+            display: flex ! important;
+            justify-content: center;
+            align-items: center;
+            background-color: red ! important;
+            width: 400px;
+            height: 400px;
+            margin: 19px 32px 10px 15px;
+        }
+
+        .showCard {
+            position: relative;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+            width: 100vw;
+            height: 500px;
+            box-shadow: 5px 2px 20px 12px black;
+        }
+
+        .catchPhrase {
+            width: 600px;
+            z-index: 1;
+        }
+
+        .showProduct {
+            width: 350px;
+            transition: transform .2s;
+            z-index: 1;
+        }
+
+        .showCharacter {
+            width: 450px;
+            transition: transform .2s;
+            filter: drop-shadow(3px -7px 5px red);
+            z-index: 1;
+        }
+
+        .showCard:hover .showCharacter {
+            transform: scale(1.05);
+        }
+
+        .showCard:hover .showProduct {
+            transform: scale(1.1);
+        }
+
+        .showBackground {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            background: url("imgs/mainBG.jpg");
+            background-clip: border-box;
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+    </style>
+
+</html>
+
+

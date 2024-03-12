@@ -3,38 +3,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Main</title>
 
     </h:head>
     <h:body>
         <div class="main">
-            <h:form>
+            <h:form id="mainForm">
                 <p:growl />
 
-                <p:dialog header="Carrinho" widgetVar="prodDiag" minHeight="50" width="350" showEffect="fade" modal="true">
-                    <ui:repeat value="#{managerProduto.produtosCarrinho}" var="produto">
-                        <div class="diagContent">
-                            <h:outputText value="#{produto.nome}"/>
-                            <p:spacer />
-                            <p:commandButton icon="pi pi-trash" actionListener="#{managerProduto.removerDoCarrinho(produto)}" value="remover" onclick="PF('prodDiag').close()"/>
-                        </div>
-                         <p:spacer />
-                    </ui:repeat>
-                </p:dialog>
 
+                <p:sidebar styleClass="userSideBar" widgetVar="userSideBar" position="right">
+                    <h3 style="margin-bottom: 50px; margin-top: 7px">Drawer</h3>
+                    <p:spacer height="25"/>
+                    <p:button value="Gerenciar produtos" href="gerenciarProduto.xhtml"/>
+                </p:sidebar>
 
                 <p:outputPanel styleClass="m-header" >
                     <img class="header-logo" src="imgs/logo.png"/>
+
                     <div class="user-card">
-                        <p:badge value="#{managerProduto.produtosCarrinho.size()}" severity="danger">
+                        <p:badge value="#{managerCarrinho.produtosCarrinho.size()}" severity="danger">
                             <p:commandButton icon="pi pi-cart-plus" onclick="PF('prodDiag').show()"/>
-                        </p:badge>
+                        </p:badge>                       
                         <p:spacer width="20"/>
-                        <p:button  value="Registrar produto" href="registrarProduto.xhtml"/>
-                        <p:spacer width="20"/>
-                        <h1 class="login-text"> Usuario: #{managerUsuario.usuario.email}</h1>
+                        <h:commandLink styleClass="userButton" onclick="PF('userSideBar').show()" >
+                            <f:ajax execute="@this" render="@none"/>
+                            <p:avatar styleClass="userLogo" size="xlarge" shape="circle" >
+                                <p:graphicImage styleClass="imageButton" value="imgs/logo.png" />
+                            </p:avatar>
+                            <p:spacer width="15"/>
+                            <h2 style="font-size: 1vw">#{managerUsuario.usuario.email}</h2>
+                            <p:spacer width="15"/>
+                            <div class="userMenu-icon">
+                                <i class="pi pi-caret-right"/>
+                            </div>
+                        </h:commandLink>
+
                     </div>
                 </p:outputPanel>
                 <div class="showCard">
@@ -54,7 +61,7 @@
                             <p:spacer height="15"/>
                             <h:outputText value="R$#{produto.preco}"/>
                             <p:spacer height="15"/>
-                            <p:commandButton value="Adicionar" actionListener="#{managerProduto.adicionarAoCarrinho(produto)}" update="@form" />
+                            <p:button value="Comprar" href="productView.xhtml?visualizar=#{produto.id}"/>
                         </p:card>
                     </ui:repeat>
                 </p:panelGrid>
@@ -71,14 +78,58 @@
             margin: 0;
         }
 
+        body .ui-sidebar {
+            background-image: url(imgs/sideBar-bg.jpg);
+            background-size: cover;
+            color: white;
+        }
+
+        .imageButton {
+            display: flex;
+            object-fit: contain;
+            width: 100px
+        }
+
         .diagContent {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: space-between;
             width: 100%;
         }
         
+       
+        .userLogo {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            background: none;
+        }
+
+        .userMenu-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #660505;
+            border-radius: 50%;
+            padding: 5px 4px 5px 5px;
+
+        }
+
+        .userButton {
+            display: flex;
+            flex-direction: row;
+            width: fit-content;
+            justify-content: space-evenly;
+            text-decoration: none;
+            background-color: #0000008c;
+            color: white;
+            border-radius: 5px;
+            align-items: center;
+            padding: 10px;
+            margin-top: 15px;
+            backdrop-filter: blur(7px);
+        }
 
 
         body .ui-dialog .ui-dialog-content {
@@ -102,7 +153,10 @@
         .user-card {
             display: flex;
             flex-direction: row;
+            align-items: center;
             margin-right: 10px;
+            width: 100%;
+            justify-content: end;
         }
 
         .login-text {
